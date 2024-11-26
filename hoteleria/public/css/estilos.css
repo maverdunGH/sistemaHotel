@@ -1,0 +1,92 @@
+.body {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    background-color: black;
+    display:flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.header-div-button{
+    padding: 10px;
+    margin: 10px;
+}
+.h1 {
+    color: white;
+    background-color: black;
+}
+.button-producto {
+    color: white;
+    background-color: black;
+    border-radius:12%;
+}
+.contenedor {
+    display: flex;
+    gap: 10px; /* Espacio entre los bloques */
+    flex-wrap: wrap; /* Permite que los bloques se muevan a la siguiente línea si es necesario */
+}
+.bloque {
+    flex: 1; /* Los bloques se ajustarán automáticamente al espacio disponible */
+    min-width: 20%; /* Ajusta el ancho mínimo para cada bloque */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    border: 0px solid #000;
+    padding: 10px;
+}
+.usuario{
+    color: white;
+}
+.contenedor-detalle {
+    display: flex;
+    gap: 1px; /* Espacio entre los bloques */
+    flex-wrap: wrap; /* Permite que los bloques se muevan a la siguiente línea si es necesario */
+}
+.bloque-detalle {
+    min-width: 5%; /* Ajusta el ancho mínimo para cada bloque */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    border: 0px solid #000;
+    padding: 10px;
+}
+.cantidad{
+    width: 30px;
+}
+.flash-notice {
+    background-color: #e0f7fa;  /* Fondo celeste */
+    border: 2px solid #00acc1;  /* Borde recuadrado de color celeste más oscuro */
+    border-radius: 8px;         /* Esquinas redondeadas */
+    padding: 20px;              /* Espaciado interno */
+    max-width: 600px;           /* Ancho máximo */
+    /*margin: 20px auto;          /* Centramos el contenedor */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
+}
+.table-orden {
+    width: 100%;
+    border-collapse: collapse;
+}
+.td-orden {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+.th-orden {
+    background-color: black;
+    color: white;
+}
+.total-orden {
+    text-align: right;
+    font-weight: bold;
+}
+.resumen-orden {
+    text-align: right;
+    margin-top: 10px;
+}
+.button.orden {
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.producto-imagen-orden {
+    width: 50px;
+}
