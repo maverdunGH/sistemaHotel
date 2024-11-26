@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}user-page{% endblock %}
+
+{% block body %}
+<header>
+    <h1>CALM RESERVE</h1>
+    <nav>
+        <a href="#">Consultar disponibilidad</a>
+        <a href="#" class="active">Reservar habitación</a>
+        <a href="#">Cancelar Reserva</a>
+        <a href="#">Reseña de habitación</a>
+        <a href="#">Administrar Perfil</a>
+        <a href="#">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main class="reserve-container">
+    <h2>Selecciona tu Habitación</h2>
+    <div class="hotel-list">
+        <div class="hotel-card">
+            <img src="/images/hotel1.jpg" alt="Hotel 1">
+            <div class="hotel-info">
+                <h3>Hotel Ejemplo 1</h3>
+                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
+                <p class="hotel-stars">★★★★★</p>
+                <button class="btn-primary">Ver detalles</button>
+            </div>
+        </div>
+        <div class="hotel-card">
+            <img src="/images/hotel2.jpg" alt="Hotel 2">
+            <div class="hotel-info">
+                <h3>Hotel Ejemplo 2</h3>
+                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
+                <p class="hotel-stars">★★★☆☆</p>
+                <button class="btn-primary">Ver detalles</button>
+            </div>
+        </div>
+        <div class="hotel-card">
+            <img src="/images/hotel3.jpg" alt="Hotel 3">
+            <div class="hotel-info">
+                <h3>Hotel Ejemplo 3</h3>
+                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
+                <p class="hotel-stars">★★★★★</p>
+                <button class="btn-primary">Ver detalles</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

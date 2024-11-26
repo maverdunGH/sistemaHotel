@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}user-page{% endblock %}
+
+{% block body %}
+<header>
+    <h1>CALM RESERVE</h1>
+    <nav>
+        <a href="/user/check-availability">Consultar disponibilidad</a>
+        <a href="/user/reserve-room">Reservar una habitación</a>
+        <a href="#">Cancelar Reserva</a>
+        <a href="#" class="active">Reseña de habitación</a>
+        <a href="/user/profile">Administrar perfil</a>
+        <a href="#">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main class="review-container">
+    <h2>Reseñas de Habitación</h2>
+    <div class="room-description">
+        <img src="/images/room-example.jpg" alt="Habitación">
+        <div class="description">
+            <h3>Descripción de la Habitación</h3>
+            <p>Esta es una habitación moderna y confortable, equipada con todas las comodidades necesarias para una estancia placentera. Dispone de una cama queen size, baño privado, WiFi gratuito, televisión por cable, y un balcón con una vista espectacular.</p>
+        </div>
+    </div>
+
+    <h3>Deja tu Comentario y Valoración</h3>
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="comment">Comentario:</label>
+            <textarea id="comment" name="comment" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="rating">Valoración:</label>
+            <div class="stars">
+                <input type="radio" id="star5" name="rating" value="5"><label for="star5">☆</label>
+                <input type="radio" id="star4" name="rating" value="4"><label for="star4">☆</label>
+                <input type="radio" id="star3" name="rating" value="3"><label for="star3">☆</label>
+                <input type="radio" id="star2" name="rating" value="2"><label for="star2">☆</label>
+                <input type="radio" id="star1" name="rating" value="1"><label for="star1">☆</label>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Enviar Reseña</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

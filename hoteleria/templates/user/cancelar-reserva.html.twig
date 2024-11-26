@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}user-page{% endblock %}
+
+{% block body %}
+<header>
+    <h1>CALM RESERVE</h1>
+    <nav>
+        <a href="/user/check-availability">Consultar disponibilidad</a>
+        <a href="/user/reserve-room">Reservar una habitación</a>
+        <a href="#" class="active">Cancelar Reserva</a>
+        <a href="/user/room-review">Reseña de habitación</a>
+        <a href="/user/profile">Administrar perfil</a>
+        <a href="#">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main class="cancel-reservation-container">
+    <h2>Cancelar Reserva</h2>
+    <div class="search-bar">
+        <label for="reservation-number">Número de Reserva:</label>
+        <input type="text" id="reservation-number" name="reservation-number">
+        <button class="btn-disabled" disabled>Buscar Reserva</button>
+    </div>
+    <div class="reservation-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Número de Reserva</th>
+                    <th>Nombre</th>
+                    <th>Fecha de Entrada</th>
+                    <th>Fecha de Salida</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12345</td>
+                    <td>Juan Pérez</td>
+                    <td>01/07/2024</td>
+                    <td>10/07/2024</td>
+                    <td>
+                        <button class="btn-primary">Consultar Reserva</button>
+                        <button class="btn-danger">Cancelar Reserva</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

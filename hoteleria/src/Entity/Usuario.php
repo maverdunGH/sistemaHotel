@@ -4,60 +4,36 @@ namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsuarioRepository::class)]
-class Usuario
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30)]
-    private ?string $clave = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 40, nullable: true)]
-    private ?string $telefono = null;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
 
-    #[ORM\Column(length: 150)]
-    private ?string $nombre = null;
-
-    #[ORM\Column(length: 150)]
-    private ?string $apellido = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $nacionalidad = null;
-
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $direccion = null;
-
-    #[ORM\Column(length: 2)]
-    private ?string $tipo = null;
-
-    #[ORM\OneToOne(mappedBy: 'idCliente', cascade: ['persist', 'remove'])]
-    private ?Resenia $resenia = null;
-
-    #[ORM\OneToOne(mappedBy: 'idCliente', cascade: ['persist', 'remove'])]
-    private ?Reserva $reserva = null;
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getClave(): ?string
-    {
-        return $this->clave;
-    }
-
-    public function setClave(string $clave): static
-    {
-        $this->clave = $clave;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -72,109 +48,58 @@ class Usuario
         return $this;
     }
 
-    public function getTelefono(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->telefono;
+        return (string) $this->email;
     }
 
-    public function setTelefono(?string $telefono): static
+    /**
+     * @see UserInterface
+     *
+     * @return list<string>
+     */
+    public function getRoles(): array 
     {
-        $this->telefono = $telefono;
+        $roles[] = 'ROLE_USER'; 
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function getNombre(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
     {
-        return $this->nombre;
+        return $this->password;
     }
 
-    public function setNombre(string $nombre): static
+    public function setPassword(string $password): static
     {
-        $this->nombre = $nombre;
+        $this->password = $password;
 
         return $this;
     }
 
-    public function getApellido(): ?string
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
     {
-        return $this->apellido;
-    }
-
-    public function setApellido(string $apellido): static
-    {
-        $this->apellido = $apellido;
-
-        return $this;
-    }
-
-    public function getNacionalidad(): ?string
-    {
-        return $this->nacionalidad;
-    }
-
-    public function setNacionalidad(?string $nacionalidad): static
-    {
-        $this->nacionalidad = $nacionalidad;
-
-        return $this;
-    }
-
-    public function getDireccion(): ?string
-    {
-        return $this->direccion;
-    }
-
-    public function setDireccion(?string $direccion): static
-    {
-        $this->direccion = $direccion;
-
-        return $this;
-    }
-
-    public function getTipo(): ?string
-    {
-        return $this->tipo;
-    }
-
-    public function setTipo(string $tipo): static
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    public function getResenia(): ?Resenia
-    {
-        return $this->resenia;
-    }
-
-    public function setResenia(Resenia $resenia): static
-    {
-        // set the owning side of the relation if necessary
-        if ($resenia->getIdCliente() !== $this) {
-            $resenia->setIdCliente($this);
-        }
-
-        $this->resenia = $resenia;
-
-        return $this;
-    }
-
-    public function getReserva(): ?Reserva
-    {
-        return $this->reserva;
-    }
-
-    public function setReserva(Reserva $reserva): static
-    {
-        // set the owning side of the relation if necessary
-        if ($reserva->getIdCliente() !== $this) {
-            $reserva->setIdCliente($this);
-        }
-
-        $this->reserva = $reserva;
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

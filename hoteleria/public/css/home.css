@@ -1,0 +1,49 @@
+.home-page header a {
+    color: white;
+    text-decoration: none;
+    background-color: #007BFF;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.home-page .img-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.home-page .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home-page .img-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: yellow;
+}
+
+.home-page .img-overlay h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.home-page .img-overlay p {
+    margin-bottom: 20px;
+}
+
+.home-page .img-overlay a {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 16px;
+}

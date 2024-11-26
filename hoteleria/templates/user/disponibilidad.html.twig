@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}user-page{% endblock %}
+
+{% block body %}
+<header>
+    <h1>CALM RESERVE</h1>
+    <nav>
+        <a href="#" class="active">Consultar disponibilidad</a>
+        <a href="#">Cancelar Reserva</a>
+        <a href="#">Reseña de habitación</a>
+        <a href="#">Administrar Perfil</a>
+        <a href="#">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main class="availability-container">
+    <h2>Consultar Disponibilidad</h2>
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="check-in">Fecha de entrada:</label>
+            <input type="date" id="check-in" name="check-in">
+        </div>
+        <div class="form-group">
+            <label for="check-out">Fecha de salida:</label>
+            <input type="date" id="check-out" name="check-out">
+        </div>
+        <div class="form-group">
+            <label for="guests">Número de huéspedes:</label>
+            <input type="number" id="guests" name="guests" min="1">
+        </div>
+        <div class="form-group">
+            <label for="room-type">Tipo de habitación:</label>
+            <select id="room-type" name="room-type">
+                <option value="individual">Individual</option>
+                <option value="doble">Doble</option>
+                <option value="suite">Suite</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="country">País:</label>
+            <select id="country" name="country">
+                <option value="">Selecciona un país</option>
+                <option value="chile">Chile</option>
+                <option value="argentina">Argentina</option>
+                <option value="brasil">Brasil</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="city">Ciudad:</label>
+            <input type="text" id="city" name="city">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Consultar Disponibilidad</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

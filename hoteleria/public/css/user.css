@@ -1,0 +1,551 @@
+.user-page header nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.user-page header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.user-page header nav a:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+.user-page .img-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.user-page .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-page .img-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+.user-page .img-overlay h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.user-page .img-overlay p:nth-child(2) {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-page .img-overlay p:nth-child(3) {
+    font-size: 16px;
+}
+
+.user-page .profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .profile-container .form-group {
+    margin-bottom: 15px;
+}
+
+.user-page .profile-container .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.user-page .profile-container .form-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-page .profile-container .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.user-page .profile-container .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .profile-container .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .profile-container .btn-secondary {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .profile-container .btn-secondary:hover {
+    background-color: #1e7e34;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    margin-top: auto;
+}
+
+header nav a.active {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.user-page .availability-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .availability-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .availability-container .form-group {
+    margin-bottom: 15px;
+}
+
+.user-page .availability-container .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.user-page .availability-container .form-group input,
+.user-page .availability-container .form-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-page .availability-container .form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-page .availability-container .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .availability-container .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .reserve-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .reserve-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .hotel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-page .hotel-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .hotel-card img {
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+}
+
+.user-page .hotel-card .hotel-info {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.user-page .hotel-card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.user-page .hotel-card p {
+    margin: 0 0 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.user-page .hotel-card .btn-primary {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.user-page .hotel-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .hotel-stars {
+    color: yellow;
+}
+
+.user-page .room-details-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .room-details-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .room-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .room-card img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.user-page .room-card .room-info {
+    flex-grow: 1;
+}
+
+.user-page .room-card .room-info p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.user-page .room-card .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .room-card .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .review-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .review-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .room-description {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.user-page .room-description img {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.user-page .room-description .description {
+    flex-grow: 1;
+}
+
+.user-page .room-description .description h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.user-page .room-description .description p {
+    font-size: 14px;
+    color: #555;
+}
+
+.user-page .form-group {
+    margin-bottom: 15px;
+}
+
+.user-page .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.user-page .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: none;
+}
+
+.user-page .form-group .stars {
+    display: flex;
+    gap: 5px;
+}
+
+.user-page .form-group .stars input {
+    display: none;
+}
+
+.user-page .form-group .stars label {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.user-page .form-group .stars input:checked ~ label,
+.user-page .form-group .stars label:hover,
+.user-page .form-group .stars label:hover ~ label {
+    color: #ffc107;
+}
+
+.user-page .form-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.user-page .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .cancel-reservation-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-page .cancel-reservation-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.user-page .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.user-page .search-bar label {
+    font-size: 14px;
+    color: #555;
+}
+
+.user-page .search-bar input {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-page .search-bar .btn-disabled {
+    background-color: #ccc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: not-allowed;
+}
+
+.user-page .reservation-table {
+    overflow-x: auto;
+}
+
+.user-page .reservation-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-page .reservation-table th,
+.user-page .reservation-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.user-page .reservation-table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.user-page .reservation-table .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .reservation-table .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.user-page .reservation-table .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-page .reservation-table .btn-danger:hover {
+    background-color: #b02a37;
+}

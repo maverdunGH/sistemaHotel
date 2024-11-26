@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}user-page{% endblock %}
+
+{% block body %}
+<header>
+    <h1>CALM RESERVE</h1>
+    <nav>
+        <a href="/user/check-availability">Consultar disponibilidad</a>
+        <a href="/user/reserve-room" class="active">Reservar habitación</a>
+        <a href="#">Cancelar Reserva</a>
+        <a href="#">Reseña de habitación</a>
+        <a href="/user/profile">Administrar Perfil</a>
+        <a href="#">Cerrar Sesión</a>
+    </nav>
+</header>
+
+<main class="room-details-container">
+    <h2>Habitación Ejemplo</h2>
+    <div class="room-card">
+        <img src="/images/room-example.jpg" alt="Habitación Ejemplo">
+        <div class="room-info">
+            <p>Descripción detallada de la habitación. Incluye servicios, características y ubicación.</p>
+            <p>Precio por noche: <strong>$XXX</strong></p>
+            <button class="btn-primary">Reservar Habitación</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}
