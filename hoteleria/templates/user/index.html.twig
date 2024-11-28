@@ -1,25 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body_class %}user-page{% endblock %}
-
 {% block body %}
-<div>
-    <header>
-        <h1>CALM RESERVE</h1>
-        <nav>
-            <a href="#">Consultar disponibilidad</a>
-            <a href="#">Reservar una habitación</a>
-            <a href="#">Cancelar Reserva</a>
-            <a href="#">Reseña de habitación</a>
-            <a href="#">Administrar perfil</a>
-            <a href="#">Cerrar Sesión</a>
-        </nav>
-    </header>
 
+{% include 'header.html.twig' %}
     <div class="img-container">
-        <img src="/images/fondo.jpg" alt="Hotel Background">
+        <img src={{asset("images/fondo.jpg")}} alt="Hotel Background">
         <div class="img-overlay">
-            <h2>Bienvenido, Ezequiel</h2>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <h2>Bienvenido, {{ app.user.email }}</h2>
+        {% endif %}
             <p>CALM RESERVE</p>
             <p>El mejor sistema para gestionar tus reservas de hotel de manera fácil y rápida.</p>
         </div>
@@ -28,5 +18,4 @@
     <footer>
         © 2024 CALM RESERVE. Todos los derechos reservados.
     </footer>
-</div>
 {% endblock %}

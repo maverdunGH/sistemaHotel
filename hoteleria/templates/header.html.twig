@@ -1,2 +1,20 @@
-{% extends 'base.html.twig' %}
 
+{% block header %}
+
+<div>
+    <header>
+        <h1>CALM RESERVE</h1>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <p>Email: {{ app.user.email }}</p>
+        {% endif %}
+        <nav>
+            <a href="#">Consultar disponibilidad</a>
+            <a href="#">Reservar una habitación</a>
+            <a href="#">Cancelar Reserva</a>
+            <a href="#">Reseña de habitación</a>
+            <a href="#">Administrar perfil</a>
+            <a href="#">Cerrar Sesión</a>
+        </nav>
+    </header>
+</div>
+{% endblock %}
