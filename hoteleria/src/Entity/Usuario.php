@@ -31,6 +31,24 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $telefono = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $nombre = null;
+
+    #[ORM\Column(length: 2, nullable: true)]
+    private ?string $tipo = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $apellido = null;
+
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $nacionalidad = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $direccion = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -101,5 +119,77 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getTelefono(): ?string
+    {
+        return $this->telefono;
+    }
+
+    public function setTelefono(?string $telefono): static
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    public function getNombre(): ?string
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre(?string $nombre): static
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getTipo(): ?string
+    {
+        return $this->tipo;
+    }
+
+    public function setTipo(?string $tipo): static
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    public function getApellido(): ?string
+    {
+        return $this->apellido;
+    }
+
+    public function setApellido(?string $apellido): static
+    {
+        $this->apellido = $apellido;
+
+        return $this;
+    }
+
+    public function getNacionalidad(): ?string
+    {
+        return $this->nacionalidad;
+    }
+
+    public function setNacionalidad(?string $nacionalidad): static
+    {
+        $this->nacionalidad = $nacionalidad;
+
+        return $this;
+    }
+
+    public function getDireccion(): ?string
+    {
+        return $this->direccion;
+    }
+
+    public function setDireccion(?string $direccion): static
+    {
+        $this->direccion = $direccion;
+
+        return $this;
     }
 }
