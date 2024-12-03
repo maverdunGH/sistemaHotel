@@ -3,17 +3,8 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
-<header>
-    <h1>CALM RESERVE</h1>
-    <nav>
-        <a href="#">Consultar disponibilidad</a>
-        <a href="#">Reservar una habitación</a>
-        <a href="#">Cancelar Reserva</a>
-        <a href="#">Reseña de habitación</a>
-        <a href="{{ path('perfil_usuario') }}" class="active">Administrar perfil</a>
-        <a href="#">Cerrar Sesión</a>
-    </nav>
-</header>
+{% include 'header.html.twig' %}
+
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">        
             {{ message }}    

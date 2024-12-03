@@ -8,12 +8,12 @@
             <p>Email: {{ app.user.email }}</p>
         {% endif %}
         <nav>
-            <a href="#">Consultar disponibilidad</a>
+            <a href="{{ path('consultar_disponibilidad') }}">Consultar disponibilidad</a>
             <a href="#">Reservar una habitación</a>
-            <a href="#">Cancelar Reserva</a>
-            <a href="#">Reseña de habitación</a>
+            <a href="{{ path('cancelar_reserva') }}">Cancelar Reserva</a>
+            <a href="{{ path('resenia_hotel') }}">Reseña de Hotel</a>
             <a href="{{ path('perfil_usuario') }}">Administrar perfil</a>
-            <a href="#">Cerrar Sesión</a>
+            <a href="{{ path('app_logout') }}">Cerrar Sesión</a>
         </nav>
     </header>
 </div>
