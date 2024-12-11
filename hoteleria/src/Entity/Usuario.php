@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -48,6 +50,17 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $direccion = null;
+
+    /**
+     * @var Collection<int, Hotel>
+     */
+    #[ORM\OneToMany(targetEntity: Hotel::class, mappedBy: 'propietario')]
+    private Collection $hotel;
+
+    public function __construct()
+    {
+        $this->hotel = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +202,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     public function setDireccion(?string $direccion): static
     {
         $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Hotel>
+     */
+    public function getHotel(): Collection
+    {
+        return $this->hotel;
+    }
+
+    public function addHotel(Hotel $hotel): static
+    {
+        if (!$this->hotel->contains($hotel)) {
+            $this->hotel->add($hotel);
+            $hotel->setPropietario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHotel(Hotel $hotel): static
+    {
+        if ($this->hotel->removeElement($hotel)) {
+            // set the owning side to null (unless already changed)
+            if ($hotel->getPropietario() === $this) {
+                $hotel->setPropietario(null);
+            }
+        }
 
         return $this;
     }

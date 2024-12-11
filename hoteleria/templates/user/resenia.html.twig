@@ -3,9 +3,9 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
+<div class="user-page">
 {% include 'header.html.twig' %}
 
-<div class="user-page">
 <main class="review-container">
     <h2>Reseñas de Habitación</h2>
     {% for key, h in hotel %}

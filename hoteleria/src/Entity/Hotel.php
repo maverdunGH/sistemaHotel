@@ -43,6 +43,10 @@ class Hotel
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descripcion = null;
 
+    #[ORM\ManyToOne(inversedBy: 'hotel')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?usuario $propietario = null;
+
     public function __construct()
     {
         $this->habitacion = new ArrayCollection();
@@ -163,6 +167,18 @@ class Hotel
     public function setDescripcion(?string $descripcion): static
     {
         $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getPropietario(): ?usuario
+    {
+        return $this->propietario;
+    }
+
+    public function setPropietario(?usuario $propietario): static
+    {
+        $this->propietario = $propietario;
 
         return $this;
     }
