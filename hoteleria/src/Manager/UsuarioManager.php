@@ -9,11 +9,11 @@ class UsuarioManager{
     private $manager;
 
     public function __construct(EntityManagerInterface $manager,UsuarioRepository $repository){
-        $this->repository = $repository;
         $this->manager = $manager;
+        $this->repository = $repository;
     }
     public function getUsuario($usuario){
-        return $this->repository->find($usuario);
+        return $this->repository->findOneBy(['id'=>$usuario]);
     }
     public function modificarUsuario($usuario,$nombre,$telefono,$clave){
         $usuario = $this->getUsuario($usuario);
