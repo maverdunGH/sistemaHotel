@@ -28,10 +28,21 @@ class ReseñaManager{
     }
     public function getReservas($usuario): array
     {
-        $item = [
-            (object) ["comentario"=>null,
-                "descripcion"=>"Prueba descripcion"]
-            ];
+        $reservasTotales = $this->repositoryReserva->findBy('id_cliente_id'=>$usuario);
+        $resenias = [];
+        $fechaFin = new \DateTime();
+        $fechaInicio = (clone $fechaFin)->modify('-14 days'); // LE SACO 14 DIAS A LA FECHA
+        foreach($reservasTotales as $r){
+            $fechaFinReserva = $r->getFechaFin();
+            if($fechaFin <= $fechaFinReserva && $fechaFinReserva >= $fechaInicio){
+                $comentarioResenia = $this->repositoryReseña->findBy('relacion_reserva_id'=>$r.getId());
+                
+                $objeto = [
+                    (object) ["comentario"=>null,
+                        "descripcion"=>"Prueba descripcion"]
+                    ];
+            }
+        }
         return $item;
     }
     private function getHotel($hotel){

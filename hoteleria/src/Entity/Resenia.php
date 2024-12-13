@@ -28,6 +28,9 @@ class Resenia
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comentario = null;
 
+    #[ORM\OneToOne(inversedBy: 'resenia', cascade: ['persist', 'remove'])]
+    private ?Reserva $relacion_reserva = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class Resenia
     public function setComentario(string $comentario): static
     {
         $this->comentario = $comentario;
+
+        return $this;
+    }
+
+    public function getRelacionReserva(): ?Reserva
+    {
+        return $this->relacion_reserva;
+    }
+
+    public function setRelacionReserva(?Reserva $relacion_reserva): static
+    {
+        $this->relacion_reserva = $relacion_reserva;
 
         return $this;
     }
