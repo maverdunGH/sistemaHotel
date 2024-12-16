@@ -13,7 +13,7 @@ class UsuarioManager{
         $this->repository = $repository;
     }
     public function getUsuario($usuario){
-        return $this->repository->findOneBy(['id'=>$usuario]);
+        return $this->repository->find($usuario);
     }
     public function modificarUsuario($usuario,$nombre,$telefono,$clave){
         $usuario = $this->getUsuario($usuario);

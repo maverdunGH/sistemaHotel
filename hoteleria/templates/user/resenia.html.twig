@@ -8,12 +8,12 @@
 
 <main class="review-container">
     <h2>Reseñas de Habitación</h2>
-    {% for key, h in hotel %}
+    {% for key, r in reseña %}
     <div class="room-description">
         <img src={{asset("images/room-example.jpg")}} alt="Habitación">
         <div class="description">
             <h3>Descripción del Hotel</h3>
-            <p>{{h.descripcion}}</p>
+            <p>{{r.hotel_descripcion}}</p>
         </div>
     </div>
 
@@ -21,10 +21,10 @@
     <form action="#" method="POST">
         <div class="form-group">
             <label for="comment">Comentario:</label>
-            {% if h.comentario == null %}
+            {% if r.comentario == null %}
             <textarea id="comment" name="comment" rows="4"></textarea>
             {% else %}
-            <textarea id="comment" name="comment" rows="4">{{h.comentario}}</textarea>
+            <textarea id="comment" name="comment" rows="4">{{r.comentario}}</textarea>
             {% endif %}
         </div>
         <div class="form-group">

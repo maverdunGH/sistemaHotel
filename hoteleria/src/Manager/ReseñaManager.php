@@ -26,32 +26,62 @@ class ReseñaManager{
         $this->repositoryReserva = $repositoryReserva;
         $this->repositoryHabitacion = $repositoryHabitacion;
     }
-    public function getReservas($usuario): array
+    public function getReservas($usuario)
     {
-        $reservasTotales = $this->repositoryReserva->findBy('id_cliente_id'=>$usuario);
+        $reservasTotales = $this->repositoryReserva->findBy(['idCliente'=>$usuario]);
         $resenias = [];
-        $fechaFin = new \DateTime();
-        $fechaInicio = (clone $fechaFin)->modify('-14 days'); // LE SACO 14 DIAS A LA FECHA
+        $fechaActual = new \DateTime();
+        $fechaInicio = (clone $fechaActual)->modify('-14 days'); // LE SACO 14 DIAS A LA FECHA
         foreach($reservasTotales as $r){
             $fechaFinReserva = $r->getFechaFin();
-            if($fechaFin <= $fechaFinReserva && $fechaFinReserva >= $fechaInicio){
-                $comentarioResenia = $this->repositoryReseña->findBy('relacion_reserva_id'=>$r.getId());
-                
-                $objeto = [
-                    (object) ["comentario"=>null,
-                        "descripcion"=>"Prueba descripcion"]
+            if($fechaActual <= $fechaFinReserva && $fechaFinReserva >= $fechaInicio){
+                $habitacion = $this->repositoryHabitacion->find($r->getIdHabitacion());
+                $hotel = $this->getHotel($habitacion->getIdHotel());
+                $reservaId = $r->getId();
+                $comentarioResenia = $this->getResenia($reservaId);
+
+                $hotelDescripcion = $hotel->getDescripcion();
+                $hotelEstrellas = $hotel->getCantEstrellas();
+                $habitacionNro = $habitacion->getNumero();
+                $comentario;
+                if($comentarioResenia != null){
+                    $comentario = $comentarioResenia->getComentario();
+                }else{
+                    $comentario = null;
+                }
+                $objeto = (object) ["hotel_descripcion"=>$hotelDescripcion,
+                        "comentario"=>$comentario,
+                        "cant_estrellas"=>$hotelEstrellas,
+                        "reserva"=>$reservaId,
+                        "hotel"=>$hotel->getId(),
+                        "resenia"=>$comentarioResenia->getId()
                     ];
-            }
+                array_push($resenias,$objeto);
+            }      
         }
-        return $item;
+        return $resenias;
     }
     private function getHotel($hotel){
         return $this->repositoryHotel->find($hotel);
     }
     private function getHabitacion($habitacion){
-        return $this->repositoryHotel->find($hotel);
+        return $this->repositoryHotel->find($habitacion);
     }
-    private function getResenia($resenia){
-        return $this->repositoryHotel->findBy($resenia);
+    private function getResenia($reserva){
+        return $this->repositoryReseña->findOneBy(['relacion_reserva'=>$reserva]);
+    }
+    public function comentarHotel($usuario,$reserva,$hotel,$comentario){
+        $resenia = $this->getResenia($reserva);
+        if($resenia == null){
+            $resenia = new Resenia();
+            $resenia->setHotel($hotel);
+            $resenia->setReserva($reserva);
+            $resenia->setIdCliente($usuario);
+            $resenia->setComentario($comentario);
+        }else{
+            $resenia->setComentario($comentario);
+        }
+        $this->manager->persist($resenia);
+        $this->manager->flush();
     }
 }
