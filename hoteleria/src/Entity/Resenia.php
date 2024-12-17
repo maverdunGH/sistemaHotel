@@ -14,14 +14,6 @@ class Resenia
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'resenia', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?usuario $idCliente = null;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?hotel $idHotel = null;
-
     #[ORM\Column]
     private ?int $calificacion = null;
 
@@ -34,30 +26,6 @@ class Resenia
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdCliente(): ?usuario
-    {
-        return $this->idCliente;
-    }
-
-    public function setIdCliente(usuario $idCliente): static
-    {
-        $this->idCliente = $idCliente;
-
-        return $this;
-    }
-
-    public function getIdHotel(): ?hotel
-    {
-        return $this->idHotel;
-    }
-
-    public function setIdHotel(hotel $idHotel): static
-    {
-        $this->idHotel = $idHotel;
-
-        return $this;
     }
 
     public function getCalificacion(): ?int

@@ -57,9 +57,16 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Hotel::class, mappedBy: 'propietario')]
     private Collection $hotel;
 
+    /**
+     * @var Collection<int, Reserva>
+     */
+    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'usuario')]
+    private Collection $reserva;
+
     public function __construct()
     {
         $this->hotel = new ArrayCollection();
+        $this->reserva = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +237,36 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($hotel->getPropietario() === $this) {
                 $hotel->setPropietario(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reserva>
+     */
+    public function getReserva(): Collection
+    {
+        return $this->reserva;
+    }
+
+    public function addReserva(Reserva $reserva): static
+    {
+        if (!$this->reserva->contains($reserva)) {
+            $this->reserva->add($reserva);
+            $reserva->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReserva(Reserva $reserva): static
+    {
+        if ($this->reserva->removeElement($reserva)) {
+            // set the owning side to null (unless already changed)
+            if ($reserva->getUsuario() === $this) {
+                $reserva->setUsuario(null);
             }
         }
 

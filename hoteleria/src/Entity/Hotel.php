@@ -34,18 +34,18 @@ class Hotel
     #[ORM\Column]
     private ?int $cantEstrellas = null;
 
-    /**
-     * @var Collection<int, Habitacion>
-     */
-    #[ORM\OneToMany(targetEntity: Habitacion::class, mappedBy: 'idHotel')]
-    private Collection $habitacion;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $descripcion = null;
 
     #[ORM\ManyToOne(inversedBy: 'hotel')]
     #[ORM\JoinColumn(nullable: false)]
     private ?usuario $propietario = null;
+
+    /**
+     * @var Collection<int, Habitacion>
+     */
+    #[ORM\OneToMany(targetEntity: Habitacion::class, mappedBy: 'hotel')]
+    private Collection $habitacion;
 
     public function __construct()
     {
@@ -129,36 +129,6 @@ class Hotel
         return $this;
     }
 
-    /**
-     * @return Collection<int, Habitacion>
-     */
-    public function getHabitacion(): Collection
-    {
-        return $this->habitacion;
-    }
-
-    public function addHabitacion(Habitacion $habitacion): static
-    {
-        if (!$this->habitacion->contains($habitacion)) {
-            $this->habitacion->add($habitacion);
-            $habitacion->setIdHotel($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHabitacion(Habitacion $habitacion): static
-    {
-        if ($this->habitacion->removeElement($habitacion)) {
-            // set the owning side to null (unless already changed)
-            if ($habitacion->getIdHotel() === $this) {
-                $habitacion->setIdHotel(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getDescripcion(): ?string
     {
         return $this->descripcion;
@@ -179,6 +149,36 @@ class Hotel
     public function setPropietario(?usuario $propietario): static
     {
         $this->propietario = $propietario;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Habitacion>
+     */
+    public function getHabitacion(): Collection
+    {
+        return $this->habitacion;
+    }
+
+    public function addHabitacion(Habitacion $habitacion): static
+    {
+        if (!$this->habitacion->contains($habitacion)) {
+            $this->habitacion->add($habitacion);
+            $habitacion->setHotel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHabitacion(Habitacion $habitacion): static
+    {
+        if ($this->habitacion->removeElement($habitacion)) {
+            // set the owning side to null (unless already changed)
+            if ($habitacion->getHotel() === $this) {
+                $habitacion->setHotel(null);
+            }
+        }
 
         return $this;
     }

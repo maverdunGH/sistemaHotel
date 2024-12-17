@@ -30,7 +30,7 @@ class ReservaManager{
         $reservasUsuario = $this->buscarReservas($usuario);
         if($reservasUsuario == null){
             return $this->buscarHoteles($pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas);
-        }if($buscarReservas($usuario)){
+        }if($this->buscarReservas($usuario)){
             return $this->buscarHoteles($pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas);
         }else{
             return null;

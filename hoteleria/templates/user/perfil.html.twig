@@ -3,6 +3,7 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
+<div class="user-page">
 {% include 'header.html.twig' %}
 
     {% for message in app.flashes('notice') %}
@@ -11,7 +12,6 @@
         </div>
     {% endfor %}
 <main>
-<div class="user-page">
     <div class="profile-container">
         <h2>Administrar Perfil</h2>
         <form action="{{ path('perfil_modificar') }}" method="post">

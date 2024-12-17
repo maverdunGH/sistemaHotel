@@ -20,16 +20,13 @@ class Reserva
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fechaFin = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $idHotel = null;
-
-    #[ORM\OneToOne(inversedBy: 'reserva', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'reserva')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?habitacion $idHabitacion = null;
+    private ?Usuario $usuario = null;
 
-    #[ORM\OneToOne(inversedBy: 'reserva', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'reserva')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?usuario $idCliente = null;
+    private ?Habitacion $habitacion = null;
 
     public function getId(): ?int
     {
@@ -60,38 +57,26 @@ class Reserva
         return $this;
     }
 
-    public function getIdHotel(): ?string
+    public function getUsuario(): ?Usuario
     {
-        return $this->idHotel;
+        return $this->usuario;
     }
 
-    public function setIdHotel(string $idHotel): static
+    public function setUsuario(?Usuario $usuario): static
     {
-        $this->idHotel = $idHotel;
+        $this->usuario = $usuario;
 
         return $this;
     }
 
-    public function getIdHabitacion(): ?habitacion
+    public function getHabitacion(): ?Habitacion
     {
-        return $this->idHabitacion;
+        return $this->habitacion;
     }
 
-    public function setIdHabitacion(habitacion $idHabitacion): static
+    public function setHabitacion(?Habitacion $habitacion): static
     {
-        $this->idHabitacion = $idHabitacion;
-
-        return $this;
-    }
-
-    public function getIdCliente(): ?usuario
-    {
-        return $this->idCliente;
-    }
-
-    public function setIdCliente(usuario $idCliente): static
-    {
-        $this->idCliente = $idCliente;
+        $this->habitacion = $habitacion;
 
         return $this;
     }

@@ -3,19 +3,9 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
-<header>
-    <h1>CALM RESERVE</h1>
-    <nav>
-        <a href="#">Consultar disponibilidad</a>
-        <a href="#" class="active">Reservar habitación</a>
-        <a href="#">Cancelar Reserva</a>
-        <a href="#">Reseña de habitación</a>
-        <a href="#">Administrar Perfil</a>
-        <a href="#">Cerrar Sesión</a>
-    </nav>
-</header>
-
 <main class="reserve-container">
+{% include 'header.html.twig' %}
+
     <h2>Selecciona tu Habitación</h2>
     <div class="hotel-list">
         <div class="hotel-card">

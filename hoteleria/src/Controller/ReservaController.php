@@ -21,7 +21,7 @@ class ReservaController extends AbstractController
         if($resultado == null){
             $this->addFlash('notice',"Ya posee reserva en ese rango de fecha");
         }
-        return $this->render('user/reserva.html.twig',['resultado'=>$resultado]);
+        return $this->render('user/reservar.html.twig',['resultado'=>$resultado]);
     }
     #[Route('/reserva_realizadas', name: 'mis_reservas')]
     public function verMiReserva(ReservaManager $reservaManager): Response

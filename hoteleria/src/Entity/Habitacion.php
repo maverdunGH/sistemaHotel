@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HabitacionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HabitacionRepository::class)]
@@ -24,10 +26,18 @@ class Habitacion
 
     #[ORM\ManyToOne(inversedBy: 'habitacion')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?hotel $idHotel = null;
+    private ?Hotel $hotel = null;
 
-    #[ORM\OneToOne(mappedBy: 'idHabitacion', cascade: ['persist', 'remove'])]
-    private ?Reserva $reserva = null;
+    /**
+     * @var Collection<int, Reserva>
+     */
+    #[ORM\OneToMany(targetEntity: Reserva::class, mappedBy: 'habitacion')]
+    private Collection $reserva;
+
+    public function __construct()
+    {
+        $this->reserva = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -70,31 +80,44 @@ class Habitacion
         return $this;
     }
 
-    public function getIdHotel(): ?hotel
+    public function getHotel(): ?Hotel
     {
-        return $this->idHotel;
+        return $this->hotel;
     }
 
-    public function setIdHotel(?hotel $idHotel): static
+    public function setHotel(?Hotel $hotel): static
     {
-        $this->idHotel = $idHotel;
+        $this->hotel = $hotel;
 
         return $this;
     }
 
-    public function getReserva(): ?Reserva
+    /**
+     * @return Collection<int, Reserva>
+     */
+    public function getReserva(): Collection
     {
         return $this->reserva;
     }
 
-    public function setReserva(Reserva $reserva): static
+    public function addReserva(Reserva $reserva): static
     {
-        // set the owning side of the relation if necessary
-        if ($reserva->getIdHabitacion() !== $this) {
-            $reserva->setIdHabitacion($this);
+        if (!$this->reserva->contains($reserva)) {
+            $this->reserva->add($reserva);
+            $reserva->setHabitacion($this);
         }
 
-        $this->reserva = $reserva;
+        return $this;
+    }
+
+    public function removeReserva(Reserva $reserva): static
+    {
+        if ($this->reserva->removeElement($reserva)) {
+            // set the owning side to null (unless already changed)
+            if ($reserva->getHabitacion() === $this) {
+                $reserva->setHabitacion(null);
+            }
+        }
 
         return $this;
     }
