@@ -1,4 +1,3 @@
-
 {% block header %}
 
 <div>
@@ -8,10 +7,9 @@
             <p>Email: {{ app.user.email }}</p>
         {% endif %}
         <nav>
-            <a href="{{ path('menu_admin') }}">Soy propietario</a>
-            <a href="{{ path('filtros') }}">Reservar</a>
-            <a href="{{ path('mis_reservas') }}">Mis Reservas</a>
-            <a href="{{ path('resenia_hotel') }}">Reseña de Hotel</a>
+            <a href="{{ path('principal') }}">Soy usuario normal</a>
+            <a href="{{ path('gestionar_publicacion') }}">Gestionar publicacion</a>
+            <a href="{{ path('historial_reservas_admin') }}">Historial reservas</a>
             <a href="{{ path('perfil_usuario') }}">Administrar perfil</a>
             <a href="{{ path('app_logout') }}">Cerrar Sesión</a>
         </nav>

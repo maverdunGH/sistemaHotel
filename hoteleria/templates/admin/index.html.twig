@@ -3,13 +3,7 @@
 {% block body %}
 
 <div class="user-page">
-{% include 'header.html.twig' %}
-    {% for message in app.flashes('notice') %}
-        <div class="flash-notice">        
-            {{ message }}    
-        </div>
-    {% endfor %}
-
+{% include 'header_admin.html.twig' %}
     <div class="img-container">
         <img src={{asset("images/fondo.jpg")}} alt="Hotel Background">
         <div class="img-overlay">
@@ -26,3 +20,4 @@
         © 2024 CALM RESERVE. Todos los derechos reservados.
     </footer>
 {% endblock %}
+

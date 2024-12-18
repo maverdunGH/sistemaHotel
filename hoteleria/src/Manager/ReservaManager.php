@@ -67,6 +67,7 @@ class ReservaManager{
                 'descripcion'=>$h->getDescripcion(),
                 'telefono'=>$h->getTelefono(),
                 'estrellas'=>$h->getCantEstrellas(),
+                'imagen'=>$h->getImagen(),
                 'habitaciones'=>$arrayDisponibilidad
             ];
             array_push($arrayHotelesEcontrados,$hotel);
@@ -172,8 +173,8 @@ class ReservaManager{
                     'nroReserva'=>$rh->getId(),
                     'habitacion'=>$rh->getHabitacion()->getNumero(),
                     'capacidad'=>$rh->getHabitacion()->getCantPersonas(),
-                    'fechaEntrada'=>$rh->getFechaEntrada(),
-                    'fechaSalida'=>$rh->getFechaSalida()
+                    'fechaEntrada'=>$rh->getFechaInicio()->format('Y-m-d'),
+                    'fechaSalida'=>$rh->getFechaFin()->format('Y-m-d')
                 ];    
                 array_push($encontrado,$reserva);
             }
@@ -185,4 +186,5 @@ class ReservaManager{
         }
         return $encontrado;
     }
+
 }

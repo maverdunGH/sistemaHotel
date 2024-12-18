@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Manager\ReservaManager;
+use App\Manager\HotelManager;
 
 class ReservaController extends AbstractController
 {
@@ -132,5 +133,23 @@ class ReservaController extends AbstractController
             $this->addFlash('notice',"No se puede cancelar la reserva");
         }            
         return $this->redirectToRoute('mis_reservas');
+    }
+
+    #[Route('/consultar_historial', name: 'historial_reservas')]
+    public function consultarHistorialReservas(): Response
+    {
+        return $this->render('admin/historial_reservas.html.twig');
+    }
+
+    #[Route('/consultar_historial_hotel/{hotel_id}', name: 'consultar_historial_hotel')]
+    public function consultarHistorialHotel(HotelManager $hotelManager, ReservaManager $reservaManager, $hotel_id): Response
+    {
+        $reservas = $reservaManager->obtenerReservasHotel($hotel_id);
+        $hotel = $hotelManager->obtenerHotel($hotel_id);
+        
+        return $this->render('admin/historial_reservas_hotel.html.twig', [
+            'reservas' => $reservas,
+            'hotel' => $hotel
+        ]);
     }
 }

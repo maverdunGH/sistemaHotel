@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body_class %}admin-page{% endblock %}
+
+{% block body %}
+{% include 'header_admin.html.twig' %}
+
+<main class="admin-reservas">
+    <h2>Historial reservas - {{ hotel.nombre }}</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Numero reserva</th>
+                <th>Numero Habitacion</th>
+                <th>Cantidad personas</th>
+                <th>Fecha entrada</th>
+                <th>Fecha salida</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.nroReserva }}</td>
+                <td>{{ reserva.habitacion }}</td>
+                <td>{{ reserva.capacidad }}</td>
+                <td>{{ reserva.fechaEntrada }}</td>
+                <td>{{ reserva.fechaSalida }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

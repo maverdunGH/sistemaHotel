@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+{% include 'header_admin.html.twig' %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<main class="admin-manage-hotels">
+
+    <h2>Gestionar Publicación de Hoteles</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Ciudad</th>
+                <th>Pais</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hotel in hoteles %}
+            <tr>
+                <td>{{ hotel.getId }}</td>
+                <td>{{ hotel.getNombre }}</td>
+                <td>{{ hotel.getDireccion }}</td>
+                <td>{{ hotel.getCiudad }}</td>
+                <td>{{ hotel.getPais }}</td>
+                <td>
+                    <a href="{{ path('ver_hotel', {hotel_id: hotel.id}) }}" class="btn-edit">Editar</a>
+                    <a href="{{ path('lista_habitaciones', {hotel_id: hotel.id}) }}" class="btn-add">Habitaciones</a>
+                    <a href="{{ path('eliminar_hotel', {hotel_id: hotel.id}) }}" class="disabled-link">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><br><br>
+
+    <h2>Agregar Hotel</h2><br><br>
+    <form method="POST" action="{{ path('agregar_hotel') }}">
+        <label for="hotel-name">Nombre del Hotel:</label>
+        <input type="text" id="hotel-name" name="nombre">
+
+        <label for="hotel-address">Dirección:</label>
+        <input type="text" id="hotel-address" name="direccion">
+
+        <label for="hotel-phone">Teléfono:</label>
+        <input type="tel" id="hotel-phone" name="telefono">
+
+        <div class="form-group">
+            <label for="hotel-country">País:</label>
+            <select id="hotel-country" name="pais">
+                <option value="argentina">Argentina</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="hotel-city">Ciudad:</label>
+            <select id="hotel-city" name="ciudad">
+                <option value="santa fe">Santa Fe</option>
+                <option value="buenos aires">Buenos Aires</option>
+            </select>
+        </div>
+
+        <label for="hotel-stars">Cantidad de Estrellas:</label>
+        <input type="number" id="hotel-stars" name="estrellas" min="1" max="5">
+
+        <label for="hotel-description">Descripción:</label>
+        <textarea id="hotel-description" name="descripcion"></textarea>
+
+        <div class="form-actions">
+            <input class="btn-save" type="submit" name="agregarHotel" value="Guardar">
+        </div>
+    </form>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

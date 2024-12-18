@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% include 'header_admin.html.twig' %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<main class="admin-manage-hotels">
+    <h2>Editar Hotel</h2><br><br>
+    <form method="POST" action="{{ path('editar_hotel', {hotel_id: hotel.id}) }}">
+        <label for="hotel-name">Nombre del Hotel:</label>
+        <input type="text" id="hotel-name" name="nombre" value="{{hotel.nombre}}">
+
+        <label for="hotel-address">Dirección:</label>
+        <input type="text" id="hotel-address" name="direccion" value="{{hotel.direccion}}">
+
+        <label for="hotel-phone">Teléfono:</label>
+        <input type="tel" id="hotel-phone" name="telefono" value={{hotel.telefono}}>
+
+        <label for="hotel-city">Ciudad:</label>
+        <input type="text" id="hotel-city" name="ciudad" value="{{hotel.ciudad}}">
+
+        <label for="hotel-country">País:</label>
+        <input type="text" id="hotel-country" name="pais" value="{{hotel.pais}}">
+
+        <label for="hotel-stars">Cantidad de Estrellas:</label>
+        <input type="number" id="hotel-stars" name="estrellas" min="1" max="5" value={{hotel.cantEstrellas}}>
+
+        <label for="hotel-description">Descripción:</label>
+        <textarea id="hotel-description" name="descripcion">{{hotel.descripcion}}</textarea>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Guardar Cambios</button>
+        </div>
+    </form>
+</main>
+
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}

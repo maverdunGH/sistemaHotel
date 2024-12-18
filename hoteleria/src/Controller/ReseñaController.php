@@ -25,6 +25,11 @@ class ReseñaController extends AbstractController
         $comentario = $request->request->get('comment');
         $calificacion = $request->request->get('rating');
 
+        if (empty($comentario) || empty($calificacion)) {
+            $this->addFlash('notice',"Faltó ingresar algunos datos");
+            return $this->redirectToRoute('resenia_hotel');
+        }
+
         $reseñaManager->comentarHotel($this->getUser(),$reserva,$hotel,$comentario,$calificacion);
 
 /*        $filtro = (object)[

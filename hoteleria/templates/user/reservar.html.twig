@@ -16,7 +16,7 @@
     {% for key, r in resultado %}
     <form action="{{ path('consultar_habitaciones') }}" method="POST">
         <div class="hotel-card">
-            <img src="/images/hotel1.jpg" alt="Hotel 1">
+            <img src={{asset(r.imagen)}} alt="Hotel 1">
             <div class="hotel-info">
                 <h3>{{r.nombre}}</h3>
                 <p>Direccion: {{r.direccion}}</p>

@@ -11,4 +11,10 @@ class PrincipalController extends AbstractController
     {
         return $this->render('user/index.html.twig');
     }
+    
+    #[Route('/admin', name: 'menu_admin')]
+    public function mostrarPantallaAdmin(): Response
+    {
+        return $this->render('admin/index.html.twig');
+    }
 }

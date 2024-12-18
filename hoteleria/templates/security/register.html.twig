@@ -2,9 +2,6 @@
 {% extends 'base.html.twig' %}
 {# ... #}
 {% block body %}
- {% if error %}
- <div>Usuario o contraseña incorrecta</div>
- {% endif %}
 
 <div class="home-page">
     <header>
@@ -17,13 +14,13 @@
         <div class="img-overlay">
             <h2>Bienvenido a CALM RESERVE</h2>
             <p>El mejor sistema para gestionar tus reservas de hotel de manera fácil y rápida.</p>
-            <h1>INICIAR SESION</h1>
-                <form action="{{ path('app_login') }}" method="post">
+            <h1>REGISTRARSE</h1>
+                <form action="{{ path('app_crear') }}" method="post">
                 <label for="username">Email:</label>
-                <input type="text" id="username" name="_username" value="{{ last_username }}"/><br>
+                <input type="text" id="username" name="_username"/><br>
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="_password"/><br>
-                <p><button type="submit"><a>Iniciar Sesión</a></button><button><a href="{{ path('app_register') }}">Registrarse</a></button></p>
+                <p><button type="submit"><a>Registrarse</a></button><button><a href="{{ path('app_login') }}">Volver</a></button></p>
             </form>
         </div>
     </div>

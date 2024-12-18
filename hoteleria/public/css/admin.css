@@ -340,3 +340,8 @@ form input {
 .btn-secondary:hover {
     background-color: #bd2130;
 }
+.disabled-link {
+    pointer-events: none; /* Desactiva el clic */
+    color: gray; /* Cambia el color para indicar que está deshabilitado */
+    text-decoration: none; /* Opcional: Elimina el subrayado */
+}

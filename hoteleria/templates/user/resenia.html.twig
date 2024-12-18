@@ -14,7 +14,7 @@
     <h2>Reseña de Hotel</h2>
     {% for key, r in reseña %}
     <div class="room-description">
-        <img src={{asset("images/room-example.jpg")}} alt="Hotel">
+        <img src={{asset(r.imagen)}} alt="Hotel">
         <div class="description">
             <h3>Descripción del Hotel</h3>
             <p>{{r.hotel_descripcion}}</p>
@@ -36,11 +36,11 @@
         <div class="form-group">
             <label for="rating">Valoración:</label>
             <div class="stars">
-                <input type="radio" id="star1" name="rating" value="1"><label for="star1">☆</label>
-                <input type="radio" id="star2" name="rating" value="2"><label for="star2">☆</label>
-                <input type="radio" id="star3" name="rating" value="3"><label for="star3">☆</label>
-                <input type="radio" id="star4" name="rating" value="4"><label for="star4">☆</label>
-                <input type="radio" id="star5" name="rating" value="5"><label for="star5">☆</label>
+                <input type="radio" id="star1" name="rating" value="1" {{ r.cant_estrellas == 1 ? 'checked' : '' }}><label for="star1">☆</label>
+                <input type="radio" id="star2" name="rating" value="2" {{ r.cant_estrellas == 2 ? 'checked' : '' }}><label for="star2">☆</label>
+                <input type="radio" id="star3" name="rating" value="3" {{ r.cant_estrellas == 3 ? 'checked' : '' }}><label for="star3">☆</label>
+                <input type="radio" id="star4" name="rating" value="4" {{ r.cant_estrellas == 4 ? 'checked' : '' }}><label for="star4">☆</label>
+                <input type="radio" id="star5" name="rating" value="5" {{ r.cant_estrellas == 5 ? 'checked' : '' }}><label for="star5">☆</label>
             </div>
         </div>
         <div class="form-actions">

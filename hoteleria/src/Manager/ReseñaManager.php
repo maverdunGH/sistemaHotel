@@ -45,16 +45,20 @@ class ReseñaManager{
                 $hotelEstrellas = $hotel->getCantEstrellas();
                 $habitacionNro = $habitacion->getNumero();
                 $comentario;
+                $estrellasResenia;
                 if($comentarioResenia != null){
                     $comentario = $comentarioResenia->getComentario();
+                    $estrellasResenia = $comentarioResenia->getCalificacion();
                 }else{
                     $comentario = null;
+                    $estrellasResenia = null;
                 }
                 $objeto = (object) ["hotel_descripcion"=>$hotelDescripcion,
                         "comentario"=>$comentario,
-                        "cant_estrellas"=>$hotelEstrellas,
+                        "cant_estrellas"=>$estrellasResenia,
                         "reservaID"=>$reservaId,
-                        "hotelID"=>$hotel->getId()
+                        "hotelID"=>$hotel->getId(),
+                        "imagen"=>$hotel->getImagen()
                     ];
                 array_push($resenias,$objeto);
             }      

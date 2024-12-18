@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% include 'header_admin.html.twig' %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+<main class="admin-manage-hotels">
+    <h2>Editar Habitacion</h2><br><br>
+    <form method="POST" action="{{ path('editar_habitacion', {hotel_id: hotel.id, habitacion_id: habitacion.id}) }}">
+
+        <label for="habitacion-numero">Número de habitación:</label>
+        <input type="number" id="habitacion-numero" name="numero" value={{habitacion.numero}}>
+
+        <label for="habitacion-capacidad">Cantidad de personas:</label>
+        <input type="number" id="habitacion-capacidad" name="cantPersonas" value={{habitacion.cantPersonas}}>
+
+        <label for="habitacion-precio">Precio noche:</label>
+        <input type="number" id="habitacion-precio" name="precio" value={{habitacion.precioNoche}}>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">Guardar Cambios</button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    Contacto: info@calmreserve.com | Tel: +123456789<br>
+    Política de privacidad | Términos y condiciones
+</footer>
+{% endblock %}
