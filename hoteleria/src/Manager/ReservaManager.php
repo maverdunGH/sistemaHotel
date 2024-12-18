@@ -91,14 +91,26 @@ class ReservaManager{
         return true;
     }
     public function consultarMisReservas($usuario){
-        return $this->repositoryReserva->findBy(['usuario'=>$usuario]);
+        $misReservas = $this->obtenerReservasUsuario($usuario);
+        $encontrado = [];
+        foreach($misReservas as $mr){
+        $resultado = [
+            'nroReserva'=> $mr->getId(),
+            'hotelDescripcion'=> $mr->getHabitacion()->getHotel()->getDescripcion(),
+            'nroHabitacion'=> $mr->getHabitacion()->getNumero(),
+            'fechaEntrada'=> $mr->getFechaInicio()->format('Y-m-d'),
+            'fechaSalida'=> $mr->getFechaFin()->format('Y-m-d')
+        ];
+        array_push($encontrado,$resultado);
+        }
+        return $encontrado;
     }
     public function cancelarReserva($reserva){
         $reserva = $this->repositoryReserva->find($reserva);
         $fechaActual = new \DateTime();
         if($fechaActual >= $reserva->getFechaInicio() && $fechaActual <= $reserva->getFechaFin()){
             return false;
-        }else if($fechaActual > $reserva->getFechaFin){
+        }else if($fechaActual >= $reserva->getFechaFin()){
             return false;
         }else{
             $this->manager->remove($reserva);
@@ -140,5 +152,8 @@ class ReservaManager{
         $reserva->setFechaFin($fechaHasta);
         $this->manager->persist($reserva);
         $this->manager->flush();
+    }
+    private function obtenerReservasUsuario($usuario){
+        return $this->repositoryReserva->findBy(['usuario'=>$usuario]);
     }
 }

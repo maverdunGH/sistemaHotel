@@ -100,22 +100,21 @@ class ReservaController extends AbstractController
     #[Route('/reserva_realizada', name: 'mis_reservas')]
     public function verMiReserva(ReservaManager $reservaManager): Response
     {
-        $misReservas = $reservaManager->consultarMisReservas($this->getUser());
+        $resultado = $reservaManager->consultarMisReservas($this->getUser());
 
-        return $this->render('user/reservas_usuario.html.twig',['misReservas'=>$misReservas]);
+        return $this->render('user/reserva_usuario.html.twig',['resultado'=>$resultado]);
     }
 
-    #[Route('/reserva_realizada', name: 'cancelar_reserva')]
-    public function cancelarReserva(ReservaManager $reservaManager, ): Response
+    #[Route('/reserva_realizada/{id}', name: 'cancelar_reserva')]
+    public function cancelarReserva(ReservaManager $reservaManager, $id): Response
     {
-        $resultado = $reservaManager->cancelarReserva($reserva);
+        $resultado = $reservaManager->cancelarReserva($id);
 
         if($resultado){
             $this->addFlash('notice',"Reserva cancelada");
         }else{
             $this->addFlash('notice',"No se puede cancelar la reserva");
-        }
-
+        }            
         return $this->redirectToRoute('mis_reservas');
     }
 }
