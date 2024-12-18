@@ -103,6 +103,11 @@ class ReservaManager{
         ];
         array_push($encontrado,$resultado);
         }
+        if(!empty($encontrado)){
+            usort($encontrado, function ($a, $b){
+                return strcmp($b['fechaEntrada'], $a['fechaEntrada']); 
+            });
+        }
         return $encontrado;
     }
     public function cancelarReserva($reserva){
@@ -155,5 +160,29 @@ class ReservaManager{
     }
     private function obtenerReservasUsuario($usuario){
         return $this->repositoryReserva->findBy(['usuario'=>$usuario]);
+    }
+    public function obtenerReservasHotel($idHotel){
+        $hotel = $this->repositoryHotel->find($idHotel);
+        $encontrado = [];
+        $habitacionesHotel = $this->repositoryHabitacion->findBy(['hotel'=>$hotel]);
+        foreach($habitacionesHotel as $h){
+            $reservasHabitacion = $this->repositoryReserva->findBy(['habitacion'=>$h]);
+            foreach($reservasHabitacion as $rh){
+                $reserva = [
+                    'nroReserva'=>$rh->getId(),
+                    'habitacion'=>$rh->getHabitacion()->getNumero(),
+                    'capacidad'=>$rh->getHabitacion()->getCantPersonas(),
+                    'fechaEntrada'=>$rh->getFechaEntrada(),
+                    'fechaSalida'=>$rh->getFechaSalida()
+                ];    
+                array_push($encontrado,$reserva);
+            }
+        }
+        if(!empty($encontrado)){
+            usort($encontrado, function ($a, $b){
+                return strcmp($b['fechaEntrada'], $a['fechaEntrada']); 
+            });
+        }
+        return $encontrado;
     }
 }

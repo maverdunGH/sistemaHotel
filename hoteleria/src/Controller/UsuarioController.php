@@ -21,7 +21,12 @@ class UsuarioController extends AbstractController
         $nombre = $request->request->get('name');
         $telefono = $request->request->get('phone');
         $clave = $request->request->get('password');
-        
+
+        if (empty($nombre) || empty($telefono)) {
+            // Mensaje de error o redirección
+            $this->addFlash('notice',"Los campos nombre y telefono no pueden estar vacios");
+            return $this->redirectToRoute('perfil_usuario');
+        }
         $usuarioManager->modificarUsuario($this->getUser(),$nombre,$telefono,$clave);
         
         $this->addFlash('notice',"Los datos fueron modificados");

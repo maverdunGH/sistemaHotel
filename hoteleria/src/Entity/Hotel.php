@@ -53,6 +53,9 @@ class Hotel
     #[ORM\OneToMany(targetEntity: Resenia::class, mappedBy: 'hotel')]
     private Collection $resenia;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imagen = null;
+
     public function __construct()
     {
         $this->habitacion = new ArrayCollection();
@@ -216,6 +219,18 @@ class Hotel
                 $resenium->setHotel(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): static
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }

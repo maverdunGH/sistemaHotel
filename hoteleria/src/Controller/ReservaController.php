@@ -26,6 +26,22 @@ class ReservaController extends AbstractController
         $fechaDesde = new \DateTime($fechaDesdeString);
         $fechaHasta = new \DateTime($fechaHastaString);
         
+        if (empty($fechaDesdeString) || empty($fechaHastaString)|| empty($pais)|| empty($ciudad)
+        || empty($cantPersonas)) {
+            $this->addFlash('notice',"Faltó ingresar algunos datos");
+            return $this->redirectToRoute('filtros');
+        }
+        if($fechaDesde > $fechaHasta){
+            $this->addFlash('notice',"Fecha de Entrada no puede ser mayor a la Fecha de Salida");
+            return $this->redirectToRoute('filtros');
+        }
+/*        $fechaActual = new \DateTime();
+        if($fechaActual > $fechaDesde){
+            $this->addFlash('notice',"Fecha de Entrada no puede ser menor a la Fecha Actual");
+            return $this->redirectToRoute('filtros');
+        }*/
+
+
 /*      $fecha = new \DateTime();
         $resultado = (object)[
             "pais"=>$pais,
@@ -40,7 +56,7 @@ class ReservaController extends AbstractController
         $resultado = $reservaManager->consultarDisponibilidad($this->getUser(), $pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas);
         if($resultado == null){
             $this->addFlash('notice',"Ya posee reserva en ese rango de fecha");
-            return $this->render('user/reservar.html.twig',['resultado'=>null,'filtro'=>null]);
+            return $this->redirectToRoute('filtros');
         }else{
             $filtro = (object)[
                 'guests'=>$cantPersonas,
