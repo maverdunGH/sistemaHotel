@@ -17,17 +17,28 @@ class ReseñaController extends AbstractController
         return $this->render('user/resenia.html.twig',['reseña'=>$reseña]);
     }
 
-    #[Route('/resenia', name: 'resenia_comentar')]
+    #[Route('/resenia/comentar', name: 'resenia_comentar')]
     public function comentarHoteles(ReseñaManager $reseñaManager, Request $request): Response
     {
-        $reserva = $request->request->get('reserva');
-        $hotel = $request->request->get('hotel');
-        $comentario = $request->request->get('comentario');
+        $reserva = $request->request->get('idReserva');
+        $hotel = $request->request->get('idHotel');
+        $comentario = $request->request->get('comment');
+        $calificacion = $request->request->get('rating');
 
-        $reseñaManager->comentarHotel($this->getUser(),$reserva,$hotel,$comentario);
+        $reseñaManager->comentarHotel($this->getUser(),$reserva,$hotel,$comentario,$calificacion);
+
+/*        $filtro = (object)[
+            'idReserva'=>$reserva,
+            'idHotel'=>$hotel,
+            'comentario'=>$comentario,
+            'calificacion'=>$calificacion
+        ];
+        return $this->render('prueba.html.twig',['filtro'=>$filtro]);
+*/
 
         $this->addFlash('notice',"Se ingresó/modificó el comentario con exito");
 
         return $this->redirectToRoute('resenia_hotel');
+        
     }
 }

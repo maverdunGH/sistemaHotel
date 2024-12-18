@@ -47,9 +47,16 @@ class Hotel
     #[ORM\OneToMany(targetEntity: Habitacion::class, mappedBy: 'hotel')]
     private Collection $habitacion;
 
+    /**
+     * @var Collection<int, Resenia>
+     */
+    #[ORM\OneToMany(targetEntity: Resenia::class, mappedBy: 'hotel')]
+    private Collection $resenia;
+
     public function __construct()
     {
         $this->habitacion = new ArrayCollection();
+        $this->resenia = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,6 +184,36 @@ class Hotel
             // set the owning side to null (unless already changed)
             if ($habitacion->getHotel() === $this) {
                 $habitacion->setHotel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Resenia>
+     */
+    public function getResenia(): Collection
+    {
+        return $this->resenia;
+    }
+
+    public function addResenium(Resenia $resenium): static
+    {
+        if (!$this->resenia->contains($resenium)) {
+            $this->resenia->add($resenium);
+            $resenium->setHotel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResenium(Resenia $resenium): static
+    {
+        if ($this->resenia->removeElement($resenium)) {
+            // set the owning side to null (unless already changed)
+            if ($resenium->getHotel() === $this) {
+                $resenium->setHotel(null);
             }
         }
 

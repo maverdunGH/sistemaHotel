@@ -5,12 +5,16 @@
 {% block body %}
 <div class="user-page">
 {% include 'header.html.twig' %}
-
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">        
+            {{ message }}    
+        </div>
+    {% endfor %}
 <main class="review-container">
-    <h2>Reseñas de Habitación</h2>
+    <h2>Reseña de Hotel</h2>
     {% for key, r in reseña %}
     <div class="room-description">
-        <img src={{asset("images/room-example.jpg")}} alt="Habitación">
+        <img src={{asset("images/room-example.jpg")}} alt="Hotel">
         <div class="description">
             <h3>Descripción del Hotel</h3>
             <p>{{r.hotel_descripcion}}</p>
@@ -18,7 +22,7 @@
     </div>
 
     <h3>Deja tu Comentario y Valoración</h3>
-    <form action="#" method="POST">
+    <form action="{{ path('resenia_comentar') }}" method="POST">
         <div class="form-group">
             <label for="comment">Comentario:</label>
             {% if r.comentario == null %}
@@ -27,6 +31,8 @@
             <textarea id="comment" name="comment" rows="4">{{r.comentario}}</textarea>
             {% endif %}
         </div>
+        <input type="hidden" name="idReserva" value={{r.reservaID}}>                
+        <input type="hidden" name="idHotel" value={{r.hotelID}}>                
         <div class="form-group">
             <label for="rating">Valoración:</label>
             <div class="stars">

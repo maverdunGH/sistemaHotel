@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\Resea;
+use App\Entity\Resenia;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Resea>
+ * @extends ServiceEntityRepository<Resenia>
  */
 class ReseaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Resea::class);
+        parent::__construct($registry, Resenia::class);
     }
 
     //    /**

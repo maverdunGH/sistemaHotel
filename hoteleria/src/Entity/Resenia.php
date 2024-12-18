@@ -20,8 +20,12 @@ class Resenia
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comentario = null;
 
-    #[ORM\OneToOne(inversedBy: 'resenia', cascade: ['persist', 'remove'])]
-    private ?Reserva $relacion_reserva = null;
+    #[ORM\ManyToOne(inversedBy: 'resenia')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Hotel $hotel = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?reserva $reserva = null;
 
     public function getId(): ?int
     {
@@ -52,14 +56,26 @@ class Resenia
         return $this;
     }
 
-    public function getRelacionReserva(): ?Reserva
+    public function getHotel(): ?Hotel
     {
-        return $this->relacion_reserva;
+        return $this->hotel;
     }
 
-    public function setRelacionReserva(?Reserva $relacion_reserva): static
+    public function setHotel(?Hotel $hotel): static
     {
-        $this->relacion_reserva = $relacion_reserva;
+        $this->hotel = $hotel;
+
+        return $this;
+    }
+
+    public function getReserva(): ?reserva
+    {
+        return $this->reserva;
+    }
+
+    public function setReserva(?reserva $reserva): static
+    {
+        $this->reserva = $reserva;
 
         return $this;
     }
