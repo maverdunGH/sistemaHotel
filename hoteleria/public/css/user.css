@@ -615,3 +615,21 @@ header nav a.active {
     font-size: 16px;
     color: #555;
 }
+
+.user-page th {
+    font-size: 18px; /* Cambiar el tamaño */
+    color: black;     /* Cambiar el color */
+    font-weight: bold; /* Hacerlo negrita */
+    text-transform: uppercase; /* Poner todo en mayúsculas */
+}
+
+.user-page a {
+    text-decoration: none; /* Sin subrayado */
+    color: white;/* Color del enlace */
+    font-weight: bold; /* Hacerlo negrita */
+    text-shadow: 
+    -1px -1px 0 black, /* Sombra arriba izquierda */
+     1px -1px 0 black, /* Sombra arriba derecha */
+    -1px  1px 0 black, /* Sombra abajo izquierda */
+     1px  1px 0 black; /* Sombra abajo derecha */
+}
