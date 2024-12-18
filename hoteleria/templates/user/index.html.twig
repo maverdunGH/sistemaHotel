@@ -4,6 +4,12 @@
 
 <div class="home-page">
 {% include 'header.html.twig' %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">        
+            {{ message }}    
+        </div>
+    {% endfor %}
+
     <div class="img-container">
         <img src={{asset("images/fondo.jpg")}} alt="Hotel Background">
         <div class="img-overlay">

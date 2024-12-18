@@ -27,20 +27,21 @@ class ReservaManager{
         $this->repositoryHabitacion = $repositoryHabitacion;
     }
     public function consultarDisponibilidad($usuario, $pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas){
-        $reservasUsuario = $this->buscarReservas($usuario);
-        if($reservasUsuario == null){
-            return $this->buscarHoteles($pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas);
-        }if($this->buscarReservas($usuario)){
+        $reservasUsuario = $this->buscarReservas($usuario, $fechaDesde, $fechaHasta);
+        if($reservasUsuario){
             return $this->buscarHoteles($pais, $ciudad, $fechaDesde, $fechaHasta, $cantPersonas);
         }else{
             return null;
         }
     }
-    private function buscarReservas($usuario){
-        $reservas = $this->repositoryReserva->findBy(['idCliente'=>$usuario]);
-        $fechaActual = new \DateTime();
+    //BUSCAR EN CASO DE QUE YA EXISTA UNA RESERVACION EN ESE RANGO DE FECHA
+    private function buscarReservas($usuario, $fechaDesde, $fechaHasta){
+        $reservas = $this->repositoryReserva->findBy(['usuario'=>$usuario]);
         foreach($reservas as $r){
-            if($fechaActual >= $r->getFechaInicio() && $fechaActual <= $r->getFechaFin()){
+            if($fechaDesde >= $r->getFechaInicio() && $fechaDesde <= $r->getFechaFin()){
+                return false;
+            }
+            if($fechaHasta >= $r->getFechaInicio() && $fechaHasta <= $r->getFechaFin()){
                 return false;
             }
         }
@@ -53,15 +54,17 @@ class ReservaManager{
             $arrayDisponibilidad = [];
             foreach($this->buscarHabitaciones($h, $cantPersonas) as $hab){
                 if($this->buscarReservaHabitacion($hab, $fechaDesde, $fechaHasta)){
-                    $habitacion = [
+                    $habitacion = (object) [
                         'numero'=>$hab->getNumero()
                     ];
+                    array_push($arrayDisponibilidad,$habitacion);
                 }
-                array_push($arrayDisponibilidad,$habitacion);
             }
-            $hotel = [
+            $hotel = (object) [
+                'id'=>$h->getId(),
                 'nombre'=>$h->getNombre(),
                 'direccion'=>$h->getDireccion(),
+                'descripcion'=>$h->getDescripcion(),
                 'telefono'=>$h->getTelefono(),
                 'estrellas'=>$h->getCantEstrellas(),
                 'habitaciones'=>$arrayDisponibilidad
@@ -71,10 +74,10 @@ class ReservaManager{
         return $arrayHotelesEcontrados;
     }
     private function buscarHabitaciones($hotel, $cantPersonas){
-        return $habitaciones = $this->findBy(['idHotel'=>$hotel, 'cantPersonas'=>$cantPersonas]);
+        return $habitaciones = $this->repositoryHabitacion->findBy(['hotel'=>$hotel, 'cantPersonas'=>$cantPersonas]);
     }
     private function buscarReservaHabitacion($habitacion, \DateTime $fechaDesde, \DateTime $fechaHasta){
-        $reservas = $this->repositoryReserva->findBy(['idHabitacion'=>$habitacion]);
+        $reservas = $this->repositoryReserva->findBy(['habitacion'=>$habitacion]);
         foreach($reservas as $r){
             $fechaInicioReserva = $r->getFechaInicio();
             $fechaFinReserva = $r->getFechaFin();
@@ -87,17 +90,8 @@ class ReservaManager{
         }
         return true;
     }
-    public function agregarReserva($usuario, $habitacion, $fechaDesde, $fechaHasta){
-        $reserva = new Reserva();
-        $reserva->setIdCliente($usuario);
-        $reserva->setIdHabitacion($habitacion);
-        $reserva->setFechaInicio($fechaDesde);
-        $reserva->setFechaFin($fechaHasta);
-        $this->manager->persist($reserva);
-        $this->manager->flush();
-    }
     public function consultarMisReservas($usuario){
-        return $this->repositoryReserva->findBy(['idCliente'=>$usuario]);
+        return $this->repositoryReserva->findBy(['usuario'=>$usuario]);
     }
     public function cancelarReserva($reserva){
         $reserva = $this->repositoryReserva->find($reserva);
@@ -111,5 +105,40 @@ class ReservaManager{
             $this->manager->flush();
             return true;
         }
+    }
+    public function mostrarHabitaciones($hotelID, $fechaDesde, $fechaHasta, $cantPersonas){
+        $hotel = $this->obtenerHotel($hotelID);
+        $arrayDisponibilidad = [];
+        foreach($this->buscarHabitaciones($hotel, $cantPersonas) as $hab){
+            if($this->buscarReservaHabitacion($hab, $fechaDesde, $fechaHasta)){
+                $habitacion = [
+                    'id'=>$hab->getId(),
+                    'numero'=>$hab->getNumero(),
+                    'cantPersonas'=>$hab->getCantPersonas(),
+                    'precio'=>$hab->getPrecioNoche()
+                ];
+                array_push($arrayDisponibilidad,$habitacion);
+            }
+        }
+        return $arrayDisponibilidad;
+    }
+
+    private function obtenerHotel($id){
+        return $this->repositoryHotel->findOneBy(['id'=>$id]);    
+    }
+
+    private function obtenerHabitacion($id){
+        return $this->repositoryHabitacion->findOneBy(['id'=>$id]);    
+    }
+
+    public function reservarHabitacion($usuario, $idHabitacion, \DateTime $fechaDesde, \DateTime $fechaHasta){
+        $habitacion = $this->obtenerHabitacion($idHabitacion);
+        $reserva = new Reserva();
+        $reserva->setUsuario($usuario);
+        $reserva->setHabitacion($habitacion);
+        $reserva->setFechaInicio($fechaDesde);
+        $reserva->setFechaFin($fechaHasta);
+        $this->manager->persist($reserva);
+        $this->manager->flush();
     }
 }

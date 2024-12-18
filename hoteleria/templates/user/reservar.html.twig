@@ -3,41 +3,37 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
+<div class="hotel-list">
 <main class="reserve-container">
 {% include 'header.html.twig' %}
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">        
+            {{ message }}    
+        </div>    
+    {% endfor %}
 
-    <h2>Selecciona tu Habitación</h2>
-    <div class="hotel-list">
+    <h2>Selecciona tu Hotel</h2>
+    {% for key, r in resultado %}
+    <form action="{{ path('consultar_habitaciones') }}" method="POST">
         <div class="hotel-card">
             <img src="/images/hotel1.jpg" alt="Hotel 1">
             <div class="hotel-info">
-                <h3>Hotel Ejemplo 1</h3>
-                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
-                <p class="hotel-stars">★★★★★</p>
-                <button class="btn-primary">Ver detalles</button>
+                <h3>{{r.nombre}}</h3>
+                <p>Direccion: {{r.direccion}}</p>
+                <p>Telefono: {{r.telefono}}</p>
+                <p>{{r.descripcion}}</p>
+                <p class="hotel-stars">{{r.estrellas}}★★★★★</p>
+                <input type="hidden" name="fechaDesde" value={{filtro.fechaDesde}}>                
+                <input type="hidden" name="fechaHasta" value={{filtro.fechaHasta}}>                
+                <input type="hidden" name="idHotel" value={{r.id}}>                
+                <input type="hidden" name="cantPersonas" value={{filtro.guests}}>                
+                <button type="submit" class="btn-primary">{{r.habitaciones|length}} Habitaciones disponibles</button>
             </div>
         </div>
-        <div class="hotel-card">
-            <img src="/images/hotel2.jpg" alt="Hotel 2">
-            <div class="hotel-info">
-                <h3>Hotel Ejemplo 2</h3>
-                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
-                <p class="hotel-stars">★★★☆☆</p>
-                <button class="btn-primary">Ver detalles</button>
-            </div>
-        </div>
-        <div class="hotel-card">
-            <img src="/images/hotel3.jpg" alt="Hotel 3">
-            <div class="hotel-info">
-                <h3>Hotel Ejemplo 3</h3>
-                <p>Descripción breve del hotel. Incluye servicios y ubicación.</p>
-                <p class="hotel-stars">★★★★★</p>
-                <button class="btn-primary">Ver detalles</button>
-            </div>
-        </div>
+    </form>
+    {% endfor %}
     </div>
 </main>
-
 <footer>
     Contacto: info@calmreserve.com | Tel: +123456789<br>
     Política de privacidad | Términos y condiciones

@@ -3,11 +3,18 @@
 {% block body_class %}user-page{% endblock %}
 
 {% block body %}
+<div class='user-page'>
 {% include 'header.html.twig' %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">        
+            {{ message }}    
+        </div>
+    {% endfor %}
 
 <main class="availability-container">
     <h2>Consultar Disponibilidad</h2>
-    <form action="#" method="POST">
+    <form action="{{ path('consultar_disponibilidad') }}" method="POST">
         <div class="form-group">
             <label for="check-in">Fecha de entrada:</label>
             <input type="date" id="check-in" name="check-in">
@@ -21,32 +28,24 @@
             <input type="number" id="guests" name="guests" min="1">
         </div>
         <div class="form-group">
-            <label for="room-type">Tipo de habitación:</label>
-            <select id="room-type" name="room-type">
-                <option value="individual">Individual</option>
-                <option value="doble">Doble</option>
-                <option value="suite">Suite</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label for="country">País:</label>
             <select id="country" name="country">
-                <option value="">Selecciona un país</option>
-                <option value="chile">Chile</option>
                 <option value="argentina">Argentina</option>
-                <option value="brasil">Brasil</option>
             </select>
         </div>
         <div class="form-group">
             <label for="city">Ciudad:</label>
-            <input type="text" id="city" name="city">
+            <select id="city" name="city">
+                <option value="santa fe">Santa Fe</option>
+                <option value="buenos aires">Buenos Aires</option>
+            </select>
         </div>
         <div class="form-actions">
             <button type="submit" class="btn-primary">Consultar Disponibilidad</button>
         </div>
     </form>
 </main>
-
+</div>
 <footer>
     Contacto: info@calmreserve.com | Tel: +123456789<br>
     Política de privacidad | Términos y condiciones

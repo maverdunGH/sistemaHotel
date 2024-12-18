@@ -1,0 +1,9 @@
+.flash-notice {
+    background-color: #e0f7fa;  /* Fondo celeste */
+    border: 2px solid #00acc1;  /* Borde recuadrado de color celeste más oscuro */
+    border-radius: 8px;         /* Esquinas redondeadas */
+    padding: 20px;              /* Espaciado interno */
+    max-width: 600px;           /* Ancho máximo */
+    /*margin: 20px auto;          /* Centramos el contenedor */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de elevación */
+}
